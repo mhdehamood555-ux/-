@@ -222,129 +222,187 @@ input,textarea,select{
 </div>
 
 <script>
-let currentStore = "";
-let stores = [
+let currentStore=""
+let stores=[
+ 
   {name:"بيتسا رزان", logo:"https://i.postimg.cc/WpZBYnNV/Whats-App-Image-2026-03-16-at-06-08-32-(2).jpg", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في بيتسا رزان", subText:"ساعات العمل:"},
-  {name:"مخبز البيك", logo:"https://i.postimg.cc/jdsgT000/Whats_App_Image_2026_03_17_at_05_17_44_(1).jpg",
-   images:["https://i.postimg.cc/028WvRgL/Whats_App_Image_2026_03_17_at_05_17_44.jpg","https://i.postimg.cc/CLFP0TTy/Whats_App_Image_2026_03_17_at_05_17_43_(2).jpg","https://i.postimg.cc/Yqpn7KKB/Whats_App_Image_2026_03_17_at_05_17_43_(1).jpg","https://i.postimg.cc/Fs9Wv55v/Whats_App_Image_2026_03_17_at_05_17_43.jpg"],
-   mainText:"أهلاً بكم في مخبز البيك", subText:"مخبوزات طازجة يوميًا 🥖 — مناقيش، خبز ساخن، ومعجنات لذيذة بطعم لا يُقاوم! 📞 046809887"},
-  {name:"دجاج السلام", logo:"https://i.postimg.cc/VNxWTXgY/1.jpg",
-   images:["https://i.postimg.cc/R0kL8wd4/2.jpg","https://i.postimg.cc/fbGfFYCz/Whats_App_Image_2026_03_17_at_04_57_07_(1).jpg","https://i.postimg.cc/PqgQc1yd/Whats_App_Image_2026_03_17_at_04_57_07_(2).jpg","https://i.postimg.cc/5thSG8gN/Whats_App_Image_2026_03_17_at_04_57_07.jpg"],
-   mainText:"أهلاً بكم في دجاج السلام", subText:"دجاج طازج يوميًا، جودة عالية ونظافة مضمونة — أفضل اختيار لوجباتك اليومية 🍗 📞 0532973625"},
-  {name:"فخفخينا الربيع", logo:"https://i.postimg.cc/rFXK7Q5t/Whats-App-Image-2026-03-17-at-04_31_30.jpg",
-   images:["https://i.postimg.cc/3R2HGCWH/1.jpg","https://i.postimg.cc/bYHhNTKm/3.jpg","https://i.postimg.cc/K84Sfy4f/4.jpg","https://i.postimg.cc/prP3nwgF/2.jpg"],
-   mainText:"أهلاً بكم في فخفخينا الربيع",
-   subText:"فخفخينا، كريب، بانكيك، بافل، ميلك شيك، عصائر طبيعية، آيسكريم، موخيتو، وچاروس — تجربة حلوة ومنعشة بكل طلب! 📞 0527319441"}
-];
 
-// عند تحميل الصفحة تحقق البيانات
-window.onload = function() {
-  let name = localStorage.getItem("name") || "";
-  let phone = localStorage.getItem("phone") || "";
-  let town = localStorage.getItem("town") || "";
-  if(name && phone && town){
-    showStores();
-  } else {
-    document.getElementById("login").style.display = "block";
-  }
-};
+{
+name:"مخبز البيك",
+logo:"https://i.postimg.cc/jdsgT000/Whats_App_Image_2026_03_17_at_05_17_44_(1).jpg",
 
-function hideAll(){ document.querySelectorAll(".section").forEach(e=>e.style.display="none"); }
+images:[
+"https://i.postimg.cc/028WvRgL/Whats_App_Image_2026_03_17_at_05_17_44.jpg",
+"https://i.postimg.cc/CLFP0TTy/Whats_App_Image_2026_03_17_at_05_17_43_(2).jpg",
+"https://i.postimg.cc/Yqpn7KKB/Whats_App_Image_2026_03_17_at_05_17_43_(1).jpg",
+"https://i.postimg.cc/Fs9Wv55v/Whats_App_Image_2026_03_17_at_05_17_43.jpg"
+],
 
+mainText:"أهلاً بكم في مخبز البيك",
+
+subText:"مخبوزات طازجة يوميًا 🥖 — مناقيش، خبز ساخن، ومعجنات لذيذة بطعم لا يُقاوم! 📞 046809887"
+},
+
+{
+name:"دجاج السلام",
+logo:"https://i.postimg.cc/VNxWTXgY/1.jpg",
+
+images:[
+"https://i.postimg.cc/R0kL8wd4/2.jpg",
+"https://i.postimg.cc/fbGfFYCz/Whats_App_Image_2026_03_17_at_04_57_07_(1).jpg",
+"https://i.postimg.cc/PqgQc1yd/Whats_App_Image_2026_03_17_at_04_57_07_(2).jpg",
+"https://i.postimg.cc/5thSG8gN/Whats_App_Image_2026_03_17_at_04_57_07.jpg"
+],
+
+mainText:"أهلاً بكم في دجاج السلام",
+
+subText:"دجاج طازج يوميًا، جودة عالية ونظافة مضمونة — أفضل اختيار لوجباتك اليومية 🍗 📞 0532973625"
+},
+
+{
+name:"فخفخينا الربيع",
+logo:"https://i.postimg.cc/rFXK7Q5t/Whats-App-Image-2026-03-17-at-04-31-30.jpg",
+
+images:[
+"https://i.postimg.cc/3R2HGCWH/1.jpg",
+"https://i.postimg.cc/bYHhNTKm/3.jpg",
+"https://i.postimg.cc/K84Sfy4f/4.jpg",
+"https://i.postimg.cc/prP3nwgF/2.jpg"
+],
+
+mainText:"أهلاً بكم في فخفخينا الربيع",
+
+subText:"فخفخينا، كريب، بانكيك، بافل، ميلك شيك، عصائر طبيعية، آيسكريم، موخيتو، وچاروس — تجربة حلوة ومنعشة بكل طلب! 📞 0527319441"
+},
+
+  {name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{
+name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"
+}
+
+
+
+
+]
+
+function hideAll(){document.querySelectorAll(".section").forEach(e=>e.style.display="none")}
 function enter(){
-  let name = document.getElementById("name").value.trim();
-  let phone = document.getElementById("phone").value.trim();
-  let town = document.getElementById("town").value;
-
-  if(!/^\d+$/.test(phone)){
-    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
-    return;
-  }
-
-  localStorage.setItem("name", name);
-  localStorage.setItem("phone", phone);
-  localStorage.setItem("town", town);
-
-  showStores();
+  let name=document.getElementById("name").value
+  let phone=document.getElementById("phone").value
+  let town=document.getElementById("town").value
+  localStorage.setItem("name",name)
+  localStorage.setItem("phone",phone)
+  localStorage.setItem("town",town)
+  showStores()
 }
-
 function showStores(){
-  hideAll();
-  document.getElementById("stores").style.display = "block";
-  let list = document.getElementById("storesList");
-  list.innerHTML = "";
+  hideAll()
+  document.getElementById("stores").style.display="block"
+  let list=document.getElementById("storesList")
+  list.innerHTML=""
   stores.forEach((s,i)=>{
-    list.innerHTML += `<div class="store"><img src="${s.logo}"><h4>${s.name}</h4><button onclick="openStore(${i})">طلب</button></div>`;
-  });
+    list.innerHTML+=<div class="store"><img src="${s.logo}"><h4>${s.name}</h4><button onclick="openStore(${i})">طلب</button></div>
+  })
 }
-
 function openStore(i){
-  currentStore = stores[i];
-  hideAll();
-  document.getElementById("storePage").style.display = "block";
-  document.getElementById("storeName").innerText = currentStore.name;
+  currentStore=stores[i]
+  hideAll()
+  document.getElementById("storePage").style.display="block"
+  document.getElementById("storeName").innerText = currentStore.name
+  let textHTML = <p style="font-weight:bold;">${currentStore.mainText}</p><p style="font-size:14px; opacity:0.8;">${currentStore.subText}</p>
 
-  let textHTML = `<p style="font-weight:bold;">${currentStore.mainText}</p>
-                  <p style="font-size:14px; opacity:0.8;">${currentStore.subText}</p>`;
-  document.getElementById("storeText").innerHTML = textHTML;
+ 
+document.getElementById("storeText").innerHTML = textHTML
+let gallery = document.getElementById("gallery")
+let html = `
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+">
+`
+currentStore.images.forEach(img=>{
+  html += `
+  <img src="${img}" 
+  style="
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:14px;
+  "
+  loading="lazy"
+  >
+  `
+})
 
-  let gallery = document.getElementById("gallery");
-  let html = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">`;
-  currentStore.images.forEach(img=>{
-    html += `<img src="${img}" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px;" loading="lazy">`;
-  });
-  html += '</div>';
-  gallery.innerHTML = html;
+html += '</div>'
+
+gallery.innerHTML = html
 }
+
 
 function openOrder(){
-  hideAll();
-  document.getElementById("orderPage").style.display="block";
-  document.getElementById("orderName").value = localStorage.getItem("name");
-  document.getElementById("orderPhone").value = localStorage.getItem("phone");
-  document.getElementById("orderStoreLogo").src = currentStore.logo;
-  document.getElementById("orderStoreName").innerText = currentStore.name;
+  hideAll()
+  document.getElementById("orderPage").style.display="block"
+
+  // بيانات المستخدم
+  document.getElementById("orderName").value = localStorage.getItem("name")
+  document.getElementById("orderPhone").value = localStorage.getItem("phone")
+
+  // بيانات المتجر الذي اختاره الزبون
+  document.getElementById("orderStoreLogo").src = currentStore.logo
+  document.getElementById("orderStoreName").innerText = currentStore.name
 }
 
-function backStore(){ hideAll(); document.getElementById("storePage").style.display="block"; }
-
+function backStore(){hideAll();document.getElementById("storePage").style.display="block"}
 function sendOrder(){
-  let name = document.getElementById("orderName").value.trim();
-  let phone = document.getElementById("orderPhone").value.trim();
-  let town = localStorage.getItem("town");
-  let order = document.getElementById("orderText").value;
-
-  if(!/^\d+$/.test(phone)){
-    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
-    return;
-  }
-
-  let msg=`طلب جديد\n\nالاسم: ${name}\nالهاتف: ${phone}\nالبلدة: ${town}\n\nالمتجر: ${currentStore.name}\n\nالطلب:\n${order}`;
-  navigator.clipboard.writeText(msg);
-  window.open(`https://wa.me/972546088878?text=${encodeURIComponent(msg)}`);
+  let name=document.getElementById("orderName").value
+  let phone=document.getElementById("orderPhone").value
+  let town=localStorage.getItem("town")
+  let order=document.getElementById("orderText").value
+  let msg=طلب جديد\n\nالاسم: ${name}\nالهاتف: ${phone}\nالبلدة: ${town}\n\nالمتجر: ${currentStore.name}\n\nالطلب:\n${order}
+  navigator.clipboard.writeText(msg)
+  window.open(https://wa.me/972546088878?text=${encodeURIComponent(msg)})
 }
-
 function toggleAccount(){
-  let box=document.getElementById("accountBox");
+  let box=document.getElementById("accountBox")
   if(box.style.display=="block"){box.style.display="none"}
   else{
-    box.style.display="block";
-    document.getElementById("accName").value = localStorage.getItem("name") || "";
-    document.getElementById("accPhone").value = localStorage.getItem("phone") || "";
-    document.getElementById("accTown").value = localStorage.getItem("town") || "";
+    box.style.display="block"
+    document.getElementById("accName").value=localStorage.getItem("name")
+    document.getElementById("accPhone").value=localStorage.getItem("phone")
+    document.getElementById("accTown").value=localStorage.getItem("town")
   }
 }
-
 function saveAccount(){
-  let phone = document.getElementById("accPhone").value.trim();
-  if(!/^\d+$/.test(phone)){
-    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
-    return;
-  }
-  localStorage.setItem("name", document.getElementById("accName").value);
-  localStorage.setItem("phone", phone);
-  localStorage.setItem("town", document.getElementById("accTown").value);
-  alert("تم حفظ التعديل");
+  localStorage.setItem("name",document.getElementById("accName").value)
+  localStorage.setItem("phone",document.getElementById("accPhone").value)
+  localStorage.setItem("town",document.getElementById("accTown").value)
+  alert("تم حفظ التعديل")
 }
 </script>
 
