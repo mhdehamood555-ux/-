@@ -14,6 +14,7 @@ body{
   text-align:center;
   overflow-x:hidden;
 }
+
 header{
   background:#1a1a1a;
   padding:8px;
@@ -97,27 +98,30 @@ input,textarea,select{
   border-radius:14px;
   padding:10px;
   box-shadow:0 0 10px #000;
+
 }
 .store img{
   width:70px;
   height:70px;
   border-radius:50%;
-  object-fit:cover;
+  object-fit:contain;
+  background:#222;
 }
+
 .back{
   background:#444;
   color:white;
 }
-video{
-  width:100%;
-  border-radius:12px;
-  margin-top:10px;
-}
+
 .gallery img{
-  width:48%;
+  width:100%;
+  height:auto;
+  border-radius:14px;
+  object-fit:cover;
   margin-top:10px;
-  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.4);
 }
+
 .accountBox{
   position:fixed;
   top:60px;
@@ -192,7 +196,6 @@ video{
   </div>
   <h2 id="storeName"></h2>
   <div class="storeText" id="storeText"></div>
-  <video id="storeVideo" controls></video>
   <div class="gallery" id="gallery"></div>
   اذا واجهتم أي مشكلة<br>يمكنكم الاتصال بنا على:0546088878
 </div>
@@ -221,19 +224,89 @@ video{
 <script>
 let currentStore=""
 let stores=[
-  {name:"فخفخينا الربيع", logo:"https://i.postimg.cc/bY46FYQK/Whats-App-Image-2026-03-16-at-06-08-32-(1).jpg", video:"PUT_VIDEO", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في فخفخينا الربيع", subText:"ساعات العمل:12:00-00:00"},
+ 
+  {name:"بيتسا رزان", logo:"https://i.postimg.cc/WpZBYnNV/Whats-App-Image-2026-03-16-at-06-08-32-(2).jpg", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في بيتسا رزان", subText:"ساعات العمل:"},
 
-  {name:"بيتسا رزان", logo:"https://i.postimg.cc/WpZmzGkt/Whats-App-Image-2026-03-16-at-06-08-32-(2).jpg", video:"PUT_VIDEO", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في بيتسا رزان", subText:"ساعات العمل:"},
+{
+name:"مخبز البيك",
+logo:"https://i.postimg.cc/90JxvrzY/Whats_App_Image_2026_03_17_at_05_17_44_(1).jpg",
 
-  {name:"مخبز البيك", logo:"https://i.postimg.cc/mgBy0Phh/Whats-App-Image-2026-03-16-at-06-08-32-(3).jpg", video:"PUT_VIDEO", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مخبز البيك", subText:"ساعات العمل:"},
+images:[
+"https://i.postimg.cc/br36KsdQ/Whats_App_Image_2026_03_17_at_05_17_44.jpg",
+"https://i.postimg.cc/QC06RHVQ/Whats_App_Image_2026_03_17_at_05_17_43.jpg",
+"https://i.postimg.cc/XqQ2TpX9/Whats_App_Image_2026_03_17_at_05_17_43_(1).jpg",
+"https://i.postimg.cc/QC06RHVQ/Whats_App_Image_2026_03_17_at_05_17_43.jpg"
+],
 
-  {name:"مطعم 4", logo:"PUT_LOGO", video:"PUT_VIDEO", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 4", subText:"نص توضيحي عن مطعم 4"},
+mainText:"أهلاً بكم في مخبز البيك",
 
-  {name:"مطعم 5", logo:"PUT_LOGO", video:"PUT_VIDEO", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 5", subText:"نص توضيحي عن مطعم 5"},
+subText:"مخبوزات طازجة يوميًا 🥖 — مناقيش، خبز ساخن، ومعجنات لذيذة بطعم لا يُقاوم! 📞 046809887"
+}
 
-  {name:"مطعم 6", logo:"PUT_LOGO", video:"PUT_VIDEO", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 6", subText:"نص توضيحي عن مطعم 6"},
+{
+name:"دجاج السلام",
+logo:"https://i.postimg.cc/VNxWTXgY/1.jpg",
 
-  {name:"مطعم 7", logo:"PUT_LOGO", video:"PUT_VIDEO", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"}
+images:[
+"https://i.postimg.cc/R0kL8wd4/2.jpg",
+"https://i.postimg.cc/fbGfFYCz/Whats_App_Image_2026_03_17_at_04_57_07_(1).jpg",
+"https://i.postimg.cc/PqgQc1yd/Whats_App_Image_2026_03_17_at_04_57_07_(2).jpg",
+"https://i.postimg.cc/5thSG8gN/Whats_App_Image_2026_03_17_at_04_57_07.jpg"
+],
+
+mainText:"أهلاً بكم في دجاج السلام",
+
+subText:"دجاج طازج يوميًا، جودة عالية ونظافة مضمونة — أفضل اختيار لوجباتك اليومية 🍗 📞 0532973625"
+},
+
+{
+name:"فخفخينا الربيع",
+logo:"https://i.postimg.cc/rFXK7Q5t/Whats-App-Image-2026-03-17-at-04-31-30.jpg",
+
+images:[
+"https://i.postimg.cc/3R2HGCWH/1.jpg",
+"https://i.postimg.cc/bYHhNTKm/3.jpg",
+"https://i.postimg.cc/K84Sfy4f/4.jpg",
+"https://i.postimg.cc/prP3nwgF/2.jpg"
+],
+
+mainText:"أهلاً بكم في فخفخينا الربيع",
+
+subText:"فخفخينا، كريب، بانكيك، بافل، ميلك شيك، عصائر طبيعية، آيسكريم، موخيتو، وچاروس — تجربة حلوة ومنعشة بكل طلب! 📞 0527319441"
+},
+
+  {name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"},
+
+
+{
+name:"مطعم 7", logo:"PUT_LOGO", 
+ images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في مطعم 7", subText:"نص توضيحي عن مطعم 7"
+}
+
+
+
+
 ]
 
 function hideAll(){document.querySelectorAll(".section").forEach(e=>e.style.display="none")}
@@ -261,14 +334,36 @@ function openStore(i){
   document.getElementById("storePage").style.display="block"
   document.getElementById("storeName").innerText = currentStore.name
   let textHTML = `<p style="font-weight:bold;">${currentStore.mainText}</p><p style="font-size:14px; opacity:0.8;">${currentStore.subText}</p>`
-  document.getElementById("storeText").innerHTML = textHTML
-  document.getElementById("storeVideo").src=currentStore.video
-  let gallery=document.getElementById("gallery")
-  let html='<div style="display:flex;gap:10px;">'
-  currentStore.images.forEach(img=>{html+=`<img src="${img}">`})
-  html+='</div>'
-  gallery.innerHTML=html
+
+ 
+document.getElementById("storeText").innerHTML = textHTML
+let gallery = document.getElementById("gallery")
+let html = `
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+">
+`
+currentStore.images.forEach(img=>{
+  html += `
+  <img src="${img}" 
+  style="
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:14px;
+  "
+  loading="lazy"
+  >
+  `
+})
+
+html += '</div>'
+
+gallery.innerHTML = html
 }
+
 
 function openOrder(){
   hideAll()
