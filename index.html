@@ -227,13 +227,7 @@ let stores = [
   {name:"بيتسا رزان", logo:"https://i.postimg.cc/WpZBYnNV/Whats-App-Image-2026-03-16-at-06-08-32-(2).jpg", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في بيتسا رزان", subText:"ساعات العمل:"},
   {name:"مخبز البيك", logo:"https://i.postimg.cc/jdsgT000/Whats_App_Image_2026_03_17_at_05_17_44_(1).jpg",
    images:["https://i.postimg.cc/028WvRgL/Whats_App_Image_2026_03_17_at_05_17_44.jpg","https://i.postimg.cc/CLFP0TTy/Whats_App_Image_2026_03_17_at_05_17_43_(2).jpg","https://i.postimg.cc/Yqpn7KKB/Whats_App_Image_2026_03_17_at_05_17_43_(1).jpg","https://i.postimg.cc/Fs9Wv55v/Whats_App_Image_2026_03_17_at_05_17_43.jpg"],
-   mainText:"أهلاً بكم في مخبز البيك", subText:"مخبوزات طازجة يوميًا 🥖 — مناقيش، خبز ساخن، ومعجنات لذيذة بطعم لا يُقاوم! 📞 046809887"},
-  {name:"دجاج السلام", logo:"https://i.postimg.cc/VNxWTXgY/1.jpg",
-   images:["https://i.postimg.cc/R0kL8wd4/2.jpg","https://i.postimg.cc/fbGfFYCz/Whats_App_Image_2026_03_17_at_04_57_07_(1).jpg","https://i.postimg.cc/PqgQc1yd/Whats_App_Image_2026_03_17_at_04_57_07_(2).jpg","https://i.postimg.cc/5thSG8gN/Whats_App_Image_2026_03_17_at_04_57_07.jpg"],
-   mainText:"أهلاً بكم في دجاج السلام", subText:"دجاج طازج يوميًا، جودة عالية ونظافة مضمونة — أفضل اختيار لوجباتك اليومية 🍗 📞 0532973625"},
-  {name:"فخفخينا الربيع", logo:"https://i.postimg.cc/rFXK7Q5t/Whats-App-Image-2026-03-17-at-04-31-30.jpg",
-   images:["https://i.postimg.cc/3R2HGCWH/1.jpg","https://i.postimg.cc/bYHhNTKm/3.jpg","https://i.postimg.cc/K84Sfy4f/4.jpg","https://i.postimg.cc/prP3nwgF/2.jpg"],
-   mainText:"أهلاً بكم في فخفخينا الربيع", subText:"فخفخينا، كريب، بانكيك، بافل، ميلك شيك، عصائر طبيعية، آيسكريم، موخيتو، وچاروس — تجربة حلوة ومنعشة بكل طلب! 📞 0527319441"}
+   mainText:"أهلاً بكم في مخبز البيك", subText:"مخبوزات طازجة يوميًا 🥖 — مناقيش، خبز ساخن، ومعجنات لذيذة بطعم لا يُقاوم! 📞 046809887"}
 ];
 
 window.onload = function(){
@@ -253,16 +247,11 @@ function enter(){
   let name = document.getElementById("name").value.trim();
   let phone = document.getElementById("phone").value.trim();
   let town = document.getElementById("town").value;
-
-  if(!/^\d+$/.test(phone)){
-    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
-    return;
-  }
+  if(!/^\d+$/.test(phone)){ alert("الرجاء إدخال أرقام فقط"); return; }
 
   localStorage.setItem("name", name);
   localStorage.setItem("phone", phone);
   localStorage.setItem("town", town);
-
   showStores();
 }
 
@@ -281,8 +270,7 @@ function openStore(i){
   hideAll();
   document.getElementById("storePage").style.display = "block";
   document.getElementById("storeName").innerText = currentStore.name;
-
-  document.getElementById("storeText").innerHTML = `<p style="font-weight:bold;">${currentStore.mainText}</p><p style="font-size:14px;opacity:0.8;">${currentStore.subText}</p>`;
+  document.getElementById("storeText").innerHTML = `<p style="font-weight:bold;">${currentStore.mainText}</p><p style="font-size:14px; opacity:0.8;">${currentStore.subText}</p>`;
 
   let gallery = document.getElementById("gallery");
   let html = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">`;
@@ -307,14 +295,9 @@ function backStore(){ hideAll(); document.getElementById("storePage").style.disp
 function sendOrder(){
   let name = document.getElementById("orderName").value.trim();
   let phone = document.getElementById("orderPhone").value.trim();
+  if(!/^\d+$/.test(phone)){ alert("الرجاء إدخال أرقام فقط"); return; }
   let town = localStorage.getItem("town");
   let order = document.getElementById("orderText").value;
-
-  if(!/^\d+$/.test(phone)){
-    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
-    return;
-  }
-
   let msg = `طلب جديد\n\nالاسم: ${name}\nالهاتف: ${phone}\nالبلدة: ${town}\n\nالمتجر: ${currentStore.name}\n\nالطلب:\n${order}`;
   navigator.clipboard.writeText(msg);
   window.open(`https://wa.me/972546088878?text=${encodeURIComponent(msg)}`);
@@ -333,7 +316,7 @@ function toggleAccount(){
 
 function saveAccount(){
   let phone = document.getElementById("accPhone").value.trim();
-  if(!/^\d+$/.test(phone)){ alert("الرجاء إدخال أرقام فقط في خانة الهاتف"); return; }
+  if(!/^\d+$/.test(phone)){ alert("الرجاء إدخال أرقام فقط"); return; }
   localStorage.setItem("name", document.getElementById("accName").value);
   localStorage.setItem("phone", phone);
   localStorage.setItem("town", document.getElementById("accTown").value);
