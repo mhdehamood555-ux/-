@@ -242,7 +242,7 @@ window.onload = function() {
   let name = localStorage.getItem("name") || "";
   let phone = localStorage.getItem("phone") || "";
   let town = localStorage.getItem("town") || "";
-  if(name && phone && town && /^\d{10}$/.test(phone)){
+  if(name && phone && town){
     showStores();
   } else {
     document.getElementById("login").style.display = "block";
@@ -256,8 +256,8 @@ function enter(){
   let phone = document.getElementById("phone").value.trim();
   let town = document.getElementById("town").value;
 
-  if(!/^\d{10}$/.test(phone)){
-    alert("الرجاء إدخال رقم هاتف صحيح مكون من 10 أرقام");
+  if(!/^\d+$/.test(phone)){
+    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
     return;
   }
 
@@ -314,8 +314,8 @@ function sendOrder(){
   let town = localStorage.getItem("town");
   let order = document.getElementById("orderText").value;
 
-  if(!/^\d{10}$/.test(phone)){
-    alert("رقم الهاتف غير صالح. تأكد من أنه 10 أرقام");
+  if(!/^\d+$/.test(phone)){
+    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
     return;
   }
 
@@ -337,8 +337,8 @@ function toggleAccount(){
 
 function saveAccount(){
   let phone = document.getElementById("accPhone").value.trim();
-  if(!/^\d{10}$/.test(phone)){
-    alert("رقم الهاتف غير صالح. يجب أن يكون 10 أرقام");
+  if(!/^\d+$/.test(phone)){
+    alert("الرجاء إدخال أرقام فقط في خانة الهاتف");
     return;
   }
   localStorage.setItem("name", document.getElementById("accName").value);
