@@ -231,40 +231,36 @@ let stores = [
   {name:"دجاج السلام", logo:"https://i.postimg.cc/VNxWTXgY/1.jpg",
    images:["https://i.postimg.cc/R0kL8wd4/2.jpg","https://i.postimg.cc/fbGfFYCz/Whats_App_Image_2026_03_17_at_04_57_07_(1).jpg","https://i.postimg.cc/PqgQc1yd/Whats_App_Image_2026_03_17_at_04_57_07_(2).jpg","https://i.postimg.cc/5thSG8gN/Whats_App_Image_2026_03_17_at_04_57_07.jpg"],
    mainText:"أهلاً بكم في دجاج السلام", subText:"دجاج طازج يوميًا، جودة عالية ونظافة مضمونة — أفضل اختيار لوجباتك اليومية 🍗 📞 0532973625"},
-  {name:"فخفخينا الربيع", logo:"https://i.postimg.cc/rFXK7Q5t/Whats-App-Image-2026-03-17-at-04-31-30.jpg",
+  {name:"فخفخينا الربيع", logo:"https://i.postimg.cc/rFXK7Q5t/Whats-App-Image-2026-03-17-at-04_31_30.jpg",
    images:["https://i.postimg.cc/3R2HGCWH/1.jpg","https://i.postimg.cc/bYHhNTKm/3.jpg","https://i.postimg.cc/K84Sfy4f/4.jpg","https://i.postimg.cc/prP3nwgF/2.jpg"],
    mainText:"أهلاً بكم في فخفخينا الربيع",
    subText:"فخفخينا، كريب، بانكيك، بافل، ميلك شيك، عصائر طبيعية، آيسكريم، موخيتو، وچاروس — تجربة حلوة ومنعشة بكل طلب! 📞 0527319441"}
 ];
 
-// عند فتح الصفحة تحقق إذا البيانات موجودة
+// عند تحميل الصفحة تحقق البيانات
 window.onload = function() {
-  let name = localStorage.getItem("name");
-  let phone = localStorage.getItem("phone");
-  let town = localStorage.getItem("town");
-
-  if(name && phone && town && phone.length === 10){
+  let name = localStorage.getItem("name") || "";
+  let phone = localStorage.getItem("phone") || "";
+  let town = localStorage.getItem("town") || "";
+  if(name && phone && town && /^\d{10}$/.test(phone)){
     showStores();
   } else {
     document.getElementById("login").style.display = "block";
   }
 };
 
-function hideAll(){document.querySelectorAll(".section").forEach(e=>e.style.display="none")}
+function hideAll(){ document.querySelectorAll(".section").forEach(e=>e.style.display="none"); }
 
-// دخول الزبون
 function enter(){
   let name = document.getElementById("name").value.trim();
   let phone = document.getElementById("phone").value.trim();
   let town = document.getElementById("town").value;
 
-  // التحقق من رقم الهاتف
-  if(phone.length !== 10 || isNaN(phone)){
+  if(!/^\d{10}$/.test(phone)){
     alert("الرجاء إدخال رقم هاتف صحيح مكون من 10 أرقام");
     return;
   }
 
-  // حفظ البيانات
   localStorage.setItem("name", name);
   localStorage.setItem("phone", phone);
   localStorage.setItem("town", town);
@@ -272,18 +268,16 @@ function enter(){
   showStores();
 }
 
-// عرض المتاجر
 function showStores(){
   hideAll();
   document.getElementById("stores").style.display = "block";
   let list = document.getElementById("storesList");
   list.innerHTML = "";
   stores.forEach((s,i)=>{
-    list.innerHTML += <div class="store"><img src="${s.logo}"><h4>${s.name}</h4><button onclick="openStore(${i})">طلب</button></div>;
+    list.innerHTML += `<div class="store"><img src="${s.logo}"><h4>${s.name}</h4><button onclick="openStore(${i})">طلب</button></div>`;
   });
 }
 
-// فتح صفحة المتجر
 function openStore(i){
   currentStore = stores[i];
   hideAll();
@@ -295,66 +289,61 @@ function openStore(i){
   document.getElementById("storeText").innerHTML = textHTML;
 
   let gallery = document.getElementById("gallery");
-  let html = <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">;
+  let html = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">`;
   currentStore.images.forEach(img=>{
-    html += <img src="${img}" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px;" loading="lazy">;
+    html += `<img src="${img}" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px;" loading="lazy">`;
   });
   html += '</div>';
   gallery.innerHTML = html;
 }
 
-// فتح صفحة الطلب
 function openOrder(){
   hideAll();
-  document.getElementById("orderPage").style.display = "block";
-
+  document.getElementById("orderPage").style.display="block";
   document.getElementById("orderName").value = localStorage.getItem("name");
   document.getElementById("orderPhone").value = localStorage.getItem("phone");
-
   document.getElementById("orderStoreLogo").src = currentStore.logo;
   document.getElementById("orderStoreName").innerText = currentStore.name;
 }
 
-function backStore(){hideAll(); document.getElementById("storePage").style.display="block"}
+function backStore(){ hideAll(); document.getElementById("storePage").style.display="block"; }
 
-// نسخ وإرسال الطلب
 function sendOrder(){
-  let name=document.getElementById("orderName").value;
-  let phone=document.getElementById("orderPhone").value;
-  let town=localStorage.getItem("town");
-  let order=document.getElementById("orderText").value;
+  let name = document.getElementById("orderName").value.trim();
+  let phone = document.getElementById("orderPhone").value.trim();
+  let town = localStorage.getItem("town");
+  let order = document.getElementById("orderText").value;
 
-  if(phone.length !== 10 || isNaN(phone)){
+  if(!/^\d{10}$/.test(phone)){
     alert("رقم الهاتف غير صالح. تأكد من أنه 10 أرقام");
     return;
   }
 
-  let msg=طلب جديد\n\nالاسم: ${name}\nالهاتف: ${phone}\nالبلدة: ${town}\n\nالمتجر: ${currentStore.name}\n\nالطلب:\n${order};
+  let msg=`طلب جديد\n\nالاسم: ${name}\nالهاتف: ${phone}\nالبلدة: ${town}\n\nالمتجر: ${currentStore.name}\n\nالطلب:\n${order}`;
   navigator.clipboard.writeText(msg);
-  window.open(https://wa.me/972546088878?text=${encodeURIComponent(msg)});
+  window.open(`https://wa.me/972546088878?text=${encodeURIComponent(msg)}`);
 }
 
-// إدارة الحساب
 function toggleAccount(){
   let box=document.getElementById("accountBox");
   if(box.style.display=="block"){box.style.display="none"}
   else{
     box.style.display="block";
-    document.getElementById("accName").value=localStorage.getItem("name");
-    document.getElementById("accPhone").value=localStorage.getItem("phone");
-    document.getElementById("accTown").value=localStorage.getItem("town");
+    document.getElementById("accName").value = localStorage.getItem("name") || "";
+    document.getElementById("accPhone").value = localStorage.getItem("phone") || "";
+    document.getElementById("accTown").value = localStorage.getItem("town") || "";
   }
 }
 
 function saveAccount(){
   let phone = document.getElementById("accPhone").value.trim();
-  if(phone.length !== 10 || isNaN(phone)){
+  if(!/^\d{10}$/.test(phone)){
     alert("رقم الهاتف غير صالح. يجب أن يكون 10 أرقام");
     return;
   }
-  localStorage.setItem("name",document.getElementById("accName").value);
-  localStorage.setItem("phone",phone);
-  localStorage.setItem("town",document.getElementById("accTown").value);
+  localStorage.setItem("name", document.getElementById("accName").value);
+  localStorage.setItem("phone", phone);
+  localStorage.setItem("town", document.getElementById("accTown").value);
   alert("تم حفظ التعديل");
 }
 </script>
