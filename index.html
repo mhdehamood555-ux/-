@@ -152,6 +152,33 @@ input,textarea,select{
 </head>
 <body>
 
+  <div id="sidebar" style="
+position:fixed;
+top:0;
+right:-300px; /* مخفية افتراضياً */
+width:300px;
+height:100%;
+background:#1e1e1e;
+box-shadow:-4px 0 10px rgba(0,0,0,0.7);
+padding:20px;
+transition:0.3s;
+overflow-y:auto;
+z-index:999;
+">
+
+  <h3>معلومات الحساب</h3>
+  <p>الاسم: <span id="sbName"></span></p>
+  <p>رقم الهاتف: <span id="sbPhone"></span></p>
+  <p>البلدة: <span id="sbTown"></span></p>
+
+  <div style="margin-top:30px;">
+    <button onclick="editAccount()" style="padding:10px; border:none; border-radius:8px; background:#d4a000; color:black; font-weight:bold; width:100%;">✏️ تعديل البيانات</button>
+  </div>
+
+  <!-- مساحة إضافية للأسفل -->
+  <div style="height:200px;"></div>
+</div>
+
 <header style="
 display:flex;
 justify-content:space-between;
@@ -185,10 +212,12 @@ position:relative;
     <!-- اسم المستخدم -->
     <span id="userNameHeader" style="font-size:14px; color:white;"></span>
 
-    <!-- أيقونة البروفايل -->
-    <div class="profile" style="width:34px; height:34px;" onclick="toggleAccount()">👤</div>
-
-  </div>
+   <!-- أيقونة الهامبرغر -->
+<div id="profileBtn" style="width:34px; height:34px; display:flex; flex-direction:column; justify-content:space-around; cursor:pointer;">
+  <span style="background:#d4a000; height:4px; border-radius:2px;"></span>
+  <span style="background:#d4a000; height:4px; border-radius:2px;"></span>
+  <span style="background:#d4a000; height:4px; border-radius:2px;"></span>
+</div>
 
 </header>
 
@@ -372,6 +401,10 @@ function enter(){
   localStorage.setItem("name", name);
   localStorage.setItem("phone", phone);
   localStorage.setItem("town", town);
+
+  // اغلاق أي نافذة جانبية مفتوحة
+  sidebar.style.right = "-300px";
+
   showStores();
 }
 
@@ -448,6 +481,36 @@ function saveAccount(){
   `;
 
   alert("تم حفظ التعديل");
+}
+
+  const sidebar = document.getElementById("sidebar");
+const profileBtn = document.getElementById("profileBtn");
+
+profileBtn.onclick = function() {
+  // تحديث بيانات المستخدم قبل الفتح
+  document.getElementById("sbName").innerText = localStorage.getItem("name") || "";
+  document.getElementById("sbPhone").innerText = localStorage.getItem("phone") || "";
+  document.getElementById("sbTown").innerText = localStorage.getItem("town") || "";
+
+  // فتح النافذة
+  sidebar.style.right = "0";
+}
+
+// وظيفة زر تعديل البيانات
+function editAccount() {
+  // إغلاق النافذة
+  sidebar.style.right = "-300px";
+
+  // الانتقال إلى تسجيل الدخول (login section)
+  hideAll();
+  document.getElementById("login").style.display = "block";
+
+  // تعبئة البيانات في الحقول
+  document.getElementById("name").value = localStorage.getItem("name") || "";
+  document.getElementById("phone").value = localStorage.getItem("phone") || "";
+  document.getElementById("town").value = localStorage.getItem("town") || "";
+
+  // عند الضغط تم في تسجيل الدخول، نعود مباشرة للمتاجر (كما عند enter())
 }
   
 </script>
