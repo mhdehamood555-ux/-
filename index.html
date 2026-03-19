@@ -153,12 +153,15 @@ input,textarea,select{
 <body>
 
 <header>
-  <div class="title">Delivery sari3</div>
+ <div style="position:absolute; right:10px; display:flex; align-items:center; gap:8px;">
+  <span id="userNameHeader" style="font-size:14px;"></span>
   <div class="profile" onclick="toggleAccount()">👤</div>
+</div>
 </header>
 
 <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
-<div class="welcome">
+  
+<div class="welcome" id="welcomeText">
   مرحباً بك <br>
   من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
 </div>
@@ -297,8 +300,29 @@ window.onload = function(){
   let name = localStorage.getItem("name") || "";
   let phone = localStorage.getItem("phone") || "";
   let town = localStorage.getItem("town") || "";
+
   if(name && phone && town){
+
+    // 🔥 إضافة الاسم في الأعلى
+    document.getElementById("userNameHeader").innerText = name;
+
+    // 🔥 تعديل الترحيب
+    document.getElementById("welcomeText").innerHTML = `
+    مرحباً ${name} 👋<br>
+    من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
+    `;
+
+    document.getElementById("userNameHeader").innerText = name;
+
+document.getElementById("welcomeText").innerHTML = `
+مرحباً ${name} 👋<br>
+من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
+`;
+
+    
+
     showStores();
+
   } else {
     document.getElementById("login").style.display = "block";
   }
@@ -380,11 +404,19 @@ function toggleAccount(){
 function saveAccount(){
   let phone = document.getElementById("accPhone").value.trim();
   if(!/^\d+$/.test(phone)){ alert("الرجاء إدخال أرقام فقط"); return; }
+
   localStorage.setItem("name", document.getElementById("accName").value);
   localStorage.setItem("phone", phone);
   localStorage.setItem("town", document.getElementById("accTown").value);
+  document.getElementById("userNameHeader").innerText = localStorage.getItem("name");
+  document.getElementById("welcomeText").innerHTML = `
+  مرحباً ${localStorage.getItem("name")} 👋<br>
+  من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
+  `;
+
   alert("تم حفظ التعديل");
 }
+  
 </script>
 
 </body>
