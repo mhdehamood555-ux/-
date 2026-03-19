@@ -159,9 +159,10 @@ align-items:center;
 padding:8px 12px;
 background:#1a1a1a;
 box-shadow:0 0 10px #000;
+position:relative;
 ">
 
-  <!-- الاسم في الوسط -->
+  <!-- اسم الموقع في الوسط -->
   <div style="
   position:absolute;
   left:50%;
@@ -177,13 +178,15 @@ box-shadow:0 0 10px #000;
   <div style="
   display:flex;
   align-items:center;
-  gap:8px;
-  margin-left:auto;
-  ">
+  gap:6px;
+  z-index:1; /* هذا يضمن ظهور الاسم فوق الخلفية */
+">
 
-    <span id="userNameHeader" style="font-size:14px;"></span>
+    <!-- اسم المستخدم -->
+    <span id="userNameHeader" style="font-size:14px; color:white;"></span>
 
-    <div class="profile" onclick="toggleAccount()">👤</div>
+    <!-- أيقونة البروفايل -->
+    <div class="profile" style="width:34px; height:34px;" onclick="toggleAccount()">👤</div>
 
   </div>
 
