@@ -15,31 +15,15 @@ body{
   overflow-x:hidden;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  z-index: 2;
+header{
+  background:#1a1a1a;
+  padding:8px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  box-shadow:0 0 10px #000;
 }
-
-/* الهامبرغر */
-#profileBtn {
-  width: 34px;
-  height: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-#profileBtn span {
-  display: block;
-  height: 4px;
-  border-radius: 2px;
-  background: #d4a000;
-}
-  
 .title{
   font-size:18px;
   font-weight:bold;
@@ -168,43 +152,13 @@ input,textarea,select{
 </head>
 <body>
 
-  <div id="sidebar" style="
-position:fixed;
-top:0;
-right:-300px; /* مخفية افتراضياً */
-width:300px;
-height:100%;
-background:#1e1e1e;
-box-shadow:-4px 0 10px rgba(0,0,0,0.7);
-padding:20px;
-transition:0.3s;
-overflow-y:auto;
-z-index:999;
-">
-
-  <h3>معلومات الحساب</h3>
-  <p>الاسم: <span id="sbName"></span></p>
-  <p>رقم الهاتف: <span id="sbPhone"></span></p>
-  <p>البلدة: <span id="sbTown"></span></p>
-
-  <!-- جهة اليمين (الاسم + الهامبرغر) -->
-    
-<div style="display:flex; align-items:center; gap:8px; position:relative; z-index:2;">
-  <span id="userNameHeader" style="font-size:14px; color:white;"></span>
-  <div id="profileBtn" style="width:34px; height:24px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer;">
-    <span style="height:4px; border-radius:2px; background:#d4a000;"></span>
-    <span style="height:4px; border-radius:2px; background:#d4a000;"></span>
-    <span style="height:4px; border-radius:2px; background:#d4a000;"></span>
-  </div>
-</div>
-  
-</div>
-    
+<header>
+  <div class="title">Delivery sari3</div>
+  <div class="profile" onclick="toggleAccount()">👤</div>
 </header>
 
 <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
-  
-<div class="welcome" id="welcomeText">
+<div class="welcome">
   مرحباً بك <br>
   من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
 </div>
@@ -268,12 +222,6 @@ z-index:999;
 </div>
 
 <script>
-
-  const sidebar = document.getElementById("sidebar");
-sidebar.style.right = "-300px"; // تأكيد إخفاءه
-
-  
-  
 let currentStore = "";
 let stores = [
    {name:"بيتسا رزان", logo:"https://i.postimg.cc/WpZBYnNV/Whats-App-Image-2026-03-16-at-06-08-32-(2).jpg", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في بيتسا رزان", subText:"ساعات العمل:"},
@@ -349,29 +297,8 @@ window.onload = function(){
   let name = localStorage.getItem("name") || "";
   let phone = localStorage.getItem("phone") || "";
   let town = localStorage.getItem("town") || "";
-
   if(name && phone && town){
-
-    // 🔥 إضافة الاسم في الأعلى
-    document.getElementById("userNameHeader").innerText = name;
-
-    // 🔥 تعديل الترحيب
-    document.getElementById("welcomeText").innerHTML = `
-    مرحباً ${name} 👋<br>
-    من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
-    `;
-
-    document.getElementById("userNameHeader").innerText = name;
-
-document.getElementById("welcomeText").innerHTML = `
-مرحباً ${name} 👋<br>
-من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
-`;
-
-    
-
     showStores();
-
   } else {
     document.getElementById("login").style.display = "block";
   }
@@ -388,10 +315,6 @@ function enter(){
   localStorage.setItem("name", name);
   localStorage.setItem("phone", phone);
   localStorage.setItem("town", town);
-
-  // اغلاق أي نافذة جانبية مفتوحة
-  sidebar.style.right = "-300px";
-
   showStores();
 }
 
@@ -457,51 +380,11 @@ function toggleAccount(){
 function saveAccount(){
   let phone = document.getElementById("accPhone").value.trim();
   if(!/^\d+$/.test(phone)){ alert("الرجاء إدخال أرقام فقط"); return; }
-
   localStorage.setItem("name", document.getElementById("accName").value);
   localStorage.setItem("phone", phone);
   localStorage.setItem("town", document.getElementById("accTown").value);
-  document.getElementById("userNameHeader").innerText = localStorage.getItem("name");
-  document.getElementById("welcomeText").innerHTML = `
-  مرحباً ${localStorage.getItem("name")} 👋<br>
-  من خلال موقعنا يمكنك انشاء طلبات والحصول عليها بأسرع وقت ممكن.
-  `;
-
   alert("تم حفظ التعديل");
 }
-
-  const sidebar = document.getElementById("sidebar");
-const profileBtn = document.getElementById("profileBtn");
-
-profileBtn.onclick = function() {
-  // تحديث بيانات المستخدم
-  document.getElementById("sbName").innerText = localStorage.getItem("name") || "";
-  document.getElementById("sbPhone").innerText = localStorage.getItem("phone") || "";
-  document.getElementById("sbTown").innerText = localStorage.getItem("town") || "";
-
-  // فتح أو غلق النافذة
-  if(sidebar.style.right === "0px"){
-    sidebar.style.right = "-300px";
-  } else {
-    sidebar.style.right = "0";
-  }
-}
-// وظيفة زر تعديل البيانات
-
- function editAccount() {
-  // إغلاق النافذة
-  sidebar.style.right = "-300px";
-
-  // عرض صفحة تسجيل الدخول
-  hideAll();
-  document.getElementById("login").style.display = "block";
-
-  // تعبئة الحقول بالبيانات الحالية
-  document.getElementById("name").value = localStorage.getItem("name") || "";
-  document.getElementById("phone").value = localStorage.getItem("phone") || "";
-  document.getElementById("town").value = localStorage.getItem("town") || "";
-}
-  
 </script>
 
 </body>
