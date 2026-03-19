@@ -15,15 +15,31 @@ body{
   overflow-x:hidden;
 }
 
-header{
-  background:#1a1a1a;
-  padding:8px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  box-shadow:0 0 10px #000;
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
 }
+
+/* الهامبرغر */
+#profileBtn {
+  width: 34px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+#profileBtn span {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: #d4a000;
+}
+  
 .title{
   font-size:18px;
   font-weight:bold;
@@ -171,54 +187,19 @@ z-index:999;
   <p>رقم الهاتف: <span id="sbPhone"></span></p>
   <p>البلدة: <span id="sbTown"></span></p>
 
-  <div style="margin-top:30px;">
-    <button onclick="editAccount()" style="padding:10px; border:none; border-radius:8px; background:#d4a000; color:black; font-weight:bold; width:100%;">✏️ تعديل البيانات</button>
+  <!-- جهة اليمين (الاسم + الهامبرغر) -->
+    
+<div style="display:flex; align-items:center; gap:8px; position:relative; z-index:2;">
+  <span id="userNameHeader" style="font-size:14px; color:white;"></span>
+  <div id="profileBtn" style="width:34px; height:24px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer;">
+    <span style="height:4px; border-radius:2px; background:#d4a000;"></span>
+    <span style="height:4px; border-radius:2px; background:#d4a000;"></span>
+    <span style="height:4px; border-radius:2px; background:#d4a000;"></span>
   </div>
-
-  <!-- مساحة إضافية للأسفل -->
-  <div style="height:200px;"></div>
 </div>
-
-<header style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:8px 12px;
-background:#1a1a1a;
-box-shadow:0 0 10px #000;
-position:relative;
-">
-
-  <!-- اسم الموقع في الوسط -->
-  <div style="
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  font-weight:bold;
-  color:#d4a000;
-  font-size:18px;
-  ">
-  Delivery sari3
-  </div>
-
-  <!-- جهة اليمين (الاسم + البروفايل) -->
-  <div style="
-  display:flex;
-  align-items:center;
-  gap:6px;
-  z-index:1; /* هذا يضمن ظهور الاسم فوق الخلفية */
-">
-
-    <!-- اسم المستخدم -->
-    <span id="userNameHeader" style="font-size:14px; color:white;"></span>
-
-   <!-- أيقونة الهامبرغر -->
-<div id="profileBtn" style="width:34px; height:34px; display:flex; flex-direction:column; justify-content:space-around; cursor:pointer;">
-  <span style="background:#d4a000; height:4px; border-radius:2px;"></span>
-  <span style="background:#d4a000; height:4px; border-radius:2px;"></span>
-  <span style="background:#d4a000; height:4px; border-radius:2px;"></span>
+  
 </div>
-
+    
 </header>
 
 <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
@@ -287,6 +268,12 @@ position:relative;
 </div>
 
 <script>
+
+  const sidebar = document.getElementById("sidebar");
+sidebar.style.right = "-300px"; // تأكيد إخفاءه
+
+  
+  
 let currentStore = "";
 let stores = [
    {name:"بيتسا رزان", logo:"https://i.postimg.cc/WpZBYnNV/Whats-App-Image-2026-03-16-at-06-08-32-(2).jpg", images:["PUT_IMG1","PUT_IMG2"], mainText:"أهلاً بكم في بيتسا رزان", subText:"ساعات العمل:"},
@@ -487,30 +474,32 @@ function saveAccount(){
 const profileBtn = document.getElementById("profileBtn");
 
 profileBtn.onclick = function() {
-  // تحديث بيانات المستخدم قبل الفتح
+  // تحديث بيانات المستخدم
   document.getElementById("sbName").innerText = localStorage.getItem("name") || "";
   document.getElementById("sbPhone").innerText = localStorage.getItem("phone") || "";
   document.getElementById("sbTown").innerText = localStorage.getItem("town") || "";
 
-  // فتح النافذة
-  sidebar.style.right = "0";
+  // فتح أو غلق النافذة
+  if(sidebar.style.right === "0px"){
+    sidebar.style.right = "-300px";
+  } else {
+    sidebar.style.right = "0";
+  }
 }
-
 // وظيفة زر تعديل البيانات
-function editAccount() {
+
+ function editAccount() {
   // إغلاق النافذة
   sidebar.style.right = "-300px";
 
-  // الانتقال إلى تسجيل الدخول (login section)
+  // عرض صفحة تسجيل الدخول
   hideAll();
   document.getElementById("login").style.display = "block";
 
-  // تعبئة البيانات في الحقول
+  // تعبئة الحقول بالبيانات الحالية
   document.getElementById("name").value = localStorage.getItem("name") || "";
   document.getElementById("phone").value = localStorage.getItem("phone") || "";
   document.getElementById("town").value = localStorage.getItem("town") || "";
-
-  // عند الضغط تم في تسجيل الدخول، نعود مباشرة للمتاجر (كما عند enter())
 }
   
 </script>
