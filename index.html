@@ -152,11 +152,41 @@ input,textarea,select{
 </head>
 <body>
 
-<header>
- <div style="position:absolute; right:10px; display:flex; align-items:center; gap:8px;">
-  <span id="userNameHeader" style="font-size:14px;"></span>
-  <div class="profile" onclick="toggleAccount()">👤</div>
-</div>
+<header style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:8px 12px;
+background:#1a1a1a;
+box-shadow:0 0 10px #000;
+">
+
+  <!-- الاسم في الوسط -->
+  <div style="
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:bold;
+  color:#d4a000;
+  font-size:18px;
+  ">
+  Delivery sari3
+  </div>
+
+  <!-- جهة اليمين (الاسم + البروفايل) -->
+  <div style="
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-left:auto;
+  ">
+
+    <span id="userNameHeader" style="font-size:14px;"></span>
+
+    <div class="profile" onclick="toggleAccount()">👤</div>
+
+  </div>
+
 </header>
 
 <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
