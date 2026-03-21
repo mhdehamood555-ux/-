@@ -1,692 +1,188 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Delivery سريع</title>
+
+<!-- خط احترافي -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
+
 body{
   margin:0;
-  font-family:'Cairo',sans-serif;
+  font-family:'Cairo', sans-serif;
   background:#111;
   color:white;
   text-align:center;
-  overflow-x:hidden;
 }
 
-header{
-  background:#1a1a1a;
-  padding:8px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  box-shadow:0 0 10px #000;
-}
-.title{
-  font-size:18px;
-  font-weight:bold;
-  color:#d4a000;
-}
-.profile{
-  position:absolute;
-  right:10px;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  background:#d4a000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:black;
-  font-weight:bold;
-  cursor:pointer;
-}
-.logo{
-  width:160px;
-  margin-top:20px;
-}
-.welcome{
-  font-size:14px;
-  opacity:.9;
-  padding:10px 20px;
-}
-.section{
-  display:none;
-  animation:fade .4s;
+/* خلفية ناعمة */
+.container{
   padding:20px;
 }
-@keyframes fade{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1}
+
+/* اللوقو */
+.logo{
+  width:130px;
+  margin-top:20px;
 }
-button{
-  background:#d4a000;
-  border:none;
+
+/* العنوان */
+h1{
+  font-size:26px;
+  margin-top:15px;
+}
+
+/* وصف */
+p{
+  opacity:0.8;
+}
+
+/* الحقول */
+input, select, textarea{
+  width:90%;
   padding:14px;
+  margin-top:12px;
   border-radius:12px;
-  font-size:18px;
-  margin-top:10px;
-  color:black;
-  font-weight:bold;
-  width:90%;
-  transition:.2s;
-}
-button:active{
-  transform:scale(.95);
-}
-input,textarea,select{
-  width:90%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:10px;
   border:1px solid #333;
   font-size:16px;
   background:#1e1e1e;
   color:white;
   text-align:center;
-}
-.storeGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-top:10px;
-}
-.store{
-  background:#1e1e1e;
-  border-radius:14px;
-  padding:10px;
-  box-shadow:0 0 10px #000;
-
-}
-.store img{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  object-fit:contain;
-  background:#222;
+  transition:0.2s;
 }
 
-.back{
-  background:#444;
-  color:white;
+input:focus, textarea:focus, select:focus{
+  outline:none;
+  border-color:#f1c40f;
+  box-shadow:0 0 5px #f1c40f;
 }
 
-.gallery img{
-  width:100%;
-  height:auto;
-  border-radius:14px;
-  object-fit:cover;
-  margin-top:10px;
+/* textarea */
+textarea{
+  height:100px;
+}
+
+/* الأزرار */
+button{
+  background:#f1c40f;
+  border:none;
+  padding:15px;
+  border-radius:12px;
+  font-size:18px;
+  margin-top:15px;
+  width:90%;
+  font-weight:bold;
+  color:black;
+  transition:0.2s;
   box-shadow:0 4px 10px rgba(0,0,0,0.4);
 }
 
-.accountBox{
-  position:fixed;
-  top:60px;
-  right:10px;
-  background:#1e1e1e;
-  padding:15px;
-  border-radius:12px;
+button:hover{
+  transform:scale(1.03);
+}
+
+button:active{
+  transform:scale(0.97);
+}
+
+/* إخفاء */
+.hidden{
   display:none;
-  width:200px;
-  box-shadow:0 0 10px black;
 }
-.accountBox input{
-  width:100%;
-  margin-bottom:8px;
-}
-.storeText p{
-  margin:5px 0;
-}
-.orderButtons{
-  display:flex;
-  gap:10px;
+
+.note{
+  font-size:13px;
   margin-top:10px;
-}
-.orderButtons button{
-  flex:1;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:15px;
-}
-
-.product{
-background:#1e1e1e;
-padding:10px;
-border-radius:12px;
-}
-
-.product img{
-width:70px;
-height:70px;
-border-radius:50%;
-object-fit:cover;
-}
-
-.product button{
-padding:6px;
-font-size:14px;
-margin-top:5px;
+  opacity:0.7;
 }
 
 </style>
 </head>
+
 <body>
 
-<header>
-  <div class="title">Delivery sari3</div>
-  <div class="profile" onclick="toggleAccount()">👤</div>
-</header>
+<div class="container">
 
+  <!-- الصفحة الأولى -->
+  <div id="home">
+    <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
 
-<div id="cartButton" onclick="openOrder()" style="
-  position:fixed;
-  top:10px;
-  left:10px;
- background:yellow;
- color:black; 
-  padding:10px 14px;
-  border-radius:50px;
-  font-weight:bold;
-  cursor:pointer;
-  z-index:1000;
-">
-  🛒 <span id="cartCount">0</span>
-</div>
+    <h1>مرحباً بك في ديليفري سريع 🛵</h1>
+    <p>اطلب أي شيء ونحن نوصله لك بأسرع وقت 🔥</p>
 
-<img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
-<div class="welcome">
-  🛵مرحباً بك في ديليڤري سريع<br>
-   من خلال موقعنا يمكنك انشاء طلبات <br>والحصول عليها الى باب المنزل<br> 
-  بأسرع وقت ممكن.
-</div>
-
-<div class="accountBox" id="accountBox">
-  <input id="accName" placeholder="الاسم">
-  <input id="accPhone" placeholder="رقم الهاتف">
-  <input id="accTown" placeholder="البلدة">
-  <button onclick="saveAccount()">حفظ</button>
-</div>
-
-<div id="login" class="section" style="display:block">
-  <h3>تسجيل الدخول</h3>
-  <input id="name" placeholder="اسمك">
-  <input id="phone" placeholder="رقم الهاتف">
-  <select id="town">
-    <option>مجد الكروم</option>
-    <option>دير الأسد</option>
-    <option>بعنة</option>
-    <option>نحف</option>
-    <option>كرمئيل</option>
-  </select>
-  <button onclick="enter()">دخول</button>
-</div>
-
-
-
-
-<div id="stores" class="section">
-  <h2>المتاجر</h2>
-  <div id="storesList" class="storeGrid"></div>
-</div>
-
-
-
-<div id="storePage" class="section">
-  <div class="orderButtons">
-   <button class="back" onclick="backFromOrder()">رجوع</button>
-    <button onclick="openOrder()">اطلب</button>
+    <button onclick="start()">ابدأ الطلب</button>
   </div>
-  <h2 id="storeName"></h2>
-  <div class="storeText" id="storeText"></div>
-  <div class="gallery" id="gallery"></div>
-  اذا واجهتم أي مشكلة<br>يمكنكم الاتصال بنا على:0546088878
-</div>
 
-<div id="orderPage" class="section">
+  <!-- صفحة الطلب -->
+  <div id="order" class="hidden">
 
-  <!-- زر الرجوع -->
-  <button class="back" onclick="backFromOrder()">رجوع</button>
+    <input id="name" placeholder="الاسم">
+    <input id="phone" placeholder="رقم الهاتف">
 
-  <h2>طلبك</h2>
+    <!-- اسم المحل -->
+    <input id="store" placeholder="اسم المحل (مثلاً: مطعم، سوبرماركت...)">
 
-  <!-- صورة واسم المتجر -->
-  <img id="orderStoreLogo" style="width:70px; height:70px; border-radius:50%; object-fit:cover; margin:10px 0;">
-  <h3 id="orderStoreName"></h3>
+    <!-- البلدة -->
+    <select id="town">
+      <option value="">اختر البلدة</option>
+      <option>مجد الكروم</option>
+      <option>دير الأسد</option>
+      <option>البعنة</option>
+      <option>كرمئيل</option>
+      <option>نحف</option>
+      <option>بار ليف</option>
+    </select>
 
-  <!-- بيانات الزبون -->
-  <input id="orderName" placeholder="اسمك">
-  <input id="orderPhone" placeholder="رقم الهاتف">
+    <textarea id="orderText" placeholder="ماذا تريد؟ ✍️"></textarea>
 
-  <div id="cartView"></div>
-<h3>المجموع: <span id="total">0</span> ₪</h3>
+    <button onclick="sendOrder()">إرسال الطلب 🚀</button>
 
-  <!-- زر نسخ وإرسال الطلب -->
-  <button onclick="sendOrder()">نسخ وارسال عبر واتساب</button>
+    <p class="note">
+📍 بعد إرسال الطلب، أرسل موقعك من واتساب لتسريع التوصيل
+    </p>
 
-</div>
-
-<div id="categories" class="section" style="display:none">
-  <h2>اختر تصنيف المتجر</h2>
-  <div class="categoryGrid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:20px;">
-    <div class="category" onclick="showStoresByCategory('fastfood')">
-      <img src="https://i.postimg.cc/hjRvSn6c/IMG-2133.jpg" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-      <div>طعام سريع</div>
-    </div>
-    <div class="category" onclick="showStoresByCategory('meat')">
-      <img src="https://i.postimg.cc/C5QVxHdg/IMG-2134.jpg" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-      <div>ملحمة</div>
-    </div>
-    <div class="category" onclick="showStoresByCategory('bakery')">
-      <img src="https://i.postimg.cc/Dw7t3MBH/IMG-2136.jpg" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-      <div>مخبز</div>
-    </div>
-    <div class="category" onclick="showStoresByCategory('coffee')">
-      <img src="https://i.postimg.cc/YCNyXz75/IMG-2135.jpg" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-      <div>قهوة</div>
-    </div>
-    <div class="category" onclick="showStoresByCategory('sweets')">
-      <img src="https://i.postimg.cc/Xqzp65bY/IMG-2137.jpg" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-      <div>حلويات</div>
-    </div>
-    <div class="category" onclick="showStoresByCategory('all')">
-      <img src="الكل صورة" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
-      <div>الكل</div>
-    </div>
   </div>
-</div>
 
+</div>
 
 <script>
 
-function backFromOrder(){
-  hideAll();
-  document.getElementById("categories").style.display = "block"; // العودة إلى التصنيفات
+function start(){
+  document.getElementById("home").style.display="none";
+  document.getElementById("order").style.display="block";
 }
-
-function backToCategories(){
-  hideAll(); // اخفاء كل الأقسام
-  document.getElementById("categories").style.display = "block"; // اظهار شاشة التصنيفات
-}
-
-function showStoresByCategory(cat){
-  hideAll();
-  document.getElementById("stores").style.display = "block";
-
-  let list = document.getElementById("storesList");
-  list.innerHTML = `<button class="back" onclick="backToCategories()">رجوع</button>`; // زر الرجوع
-
-  let filtered = cat === "all" ? stores : stores.filter(s => s.category === cat);
-
-  filtered.forEach((s, i) => {
-    list.innerHTML += `
-      <div class="store">
-        <img src="${s.logo}">
-        <h4>${s.name}</h4>
-        <div style="opacity:0.7;font-size:14px;">${s.category}</div> <!-- عرض النوع -->
-        <button onclick="openStore(${stores.indexOf(s)})">طلب</button>
-      </div>
-    `;
-  });
-}
-
-let cart=[]
-
-function addToCart(i){
-let p=currentStore.products[i]
-
-let found=cart.find(x=>x.name==p.name)
-
-if(found){
-  found.qty++
-}else{
-  cart.push({...p, qty:1})
-}
-
-renderCart() // 🔥 هذا أهم سطر
-
-alert("تمت الإضافة ✔️")
-}
-
-let currentStore=""
-let stores=[
- 
-
-{
-name:"مخبز البيك",
- category: "bakery",
-logo:"https://i.postimg.cc/mgBy0Phh/Whats_App_Image_2026_03_16_at_06_08_32_(3).jpg",
-products:[
-  {name:"بيتسا صغير", price:20, img:"https://i.postimg.cc/QCKwbBjK/IMG-2144.jpg"},
-  {name:"بيتسا وسط", price:50, img:"https://i.postimg.cc/QCKwbBjK/IMG-2144.jpg"},
-  {name:"بيتزا كبير", price:80, img:"https://i.postimg.cc/QCKwbBjK/IMG-2144.jpg"},
-  {name:"منقيش", price:12, img:"https://via.placeholder.com/100"},
-  {name:"بوريكس عجلا", price:25, img:"https://via.placeholder.com/100"},
-  {name:"مشروب صغير", price:5, img:"https://i.postimg.cc/Wb3h2TXZ/IMG-2141.jpg"},
-   {name:"مشروب كبير", price:12, img:"https://i.postimg.cc/sx0fBGw1/IMG-2142.jpg"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-{
-name:"الورد",
- category: "coffee",
-logo:"رابط الصورة",
-products:[
-  {name:"خبز", price:5, img:"https://via.placeholder.com/100"},
-  {name:"مناقيش زعتر", price:10, img:"https://via.placeholder.com/100"},
-  {name:"بيتزا", price:25, img:"https://via.placeholder.com/100"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-{
-name:"دجاج السلام",
- category: "meat",
-logo:"https://i.postimg.cc/VNxWTXgY/1.jpg",
-products:[
-  {name:"خبز", price:5, img:"https://via.placeholder.com/100"},
-  {name:"مناقيش زعتر", price:10, img:"https://via.placeholder.com/100"},
-  {name:"بيتزا", price:25, img:"https://via.placeholder.com/100"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-
-{
-name:"ابو المؤمن",
- category: "bakery",
-logo:"رابط الصورة",
-products:[
-  {name:"خبز", price:5, img:"https://via.placeholder.com/100"},
-  {name:"مناقيش زعتر", price:10, img:"https://via.placeholder.com/100"},
-  {name:"بيتزا", price:25, img:"https://via.placeholder.com/100"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-
-{
-name:"بيتسا رزان",
- category: "fastfood",
-logo:"https://i.postimg.cc/WpZmzGkt/Whats_App_Image_2026_03_16_at_06_08_32_(2).jpg",
-products:[
-  {name:"خبز", price:5, img:"https://via.placeholder.com/100"},
-  {name:"مناقيش زعتر", price:10, img:"https://via.placeholder.com/100"},
-  {name:"بيتزا", price:25, img:"https://via.placeholder.com/100"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-
-{
-name:"بيتسا ايطاليانو",
- category: "fastfood",
-logo:"https://i.postimg.cc/WpZmzGkt/Whats_App_Image_2026_03_16_at_06_08_32_(2).jpg",
-products:[
-  {name:"خبز", price:5, img:"https://via.placeholder.com/100"},
-  {name:"مناقيش زعتر", price:10, img:"https://via.placeholder.com/100"},
-  {name:"بيتزا", price:25, img:"https://via.placeholder.com/100"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-
-{
-name:"تيكساس برغر",
- category: "fastfood",
-logo:"رابط الصورة",
-products:[
-  {name:"خبز", price:5, img:"https://via.placeholder.com/100"},
-  {name:"مناقيش زعتر", price:10, img:"https://via.placeholder.com/100"},
-  {name:"بيتزا", price:25, img:"https://via.placeholder.com/100"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-
-{
-name:"فخفخينا الربيع",
- category: "sweets",
-logo:"https://i.postimg.cc/rFXK7Q5t/Whats_App_Image_2026_03_17_at_04_31_30.jpg",
-products:[
-  {name:"خبز", price:5, img:"https://via.placeholder.com/100"},
-  {name:"مناقيش زعتر", price:10, img:"https://via.placeholder.com/100"},
-  {name:"بيتزا", price:25, img:"https://via.placeholder.com/100"}
-],
-images:[],
-mainText:"أهلاً بكم...",
-subText:"..."
-},
-
-
-
-]
-
-function renderCart(){
-
-let html=""
-let total=0
-
-cart.forEach(item=>{
-  html+=`${item.name} x${item.qty}<br>`
-  total+=item.price*item.qty
-})
-
-document.getElementById("cartView").innerHTML=html
-document.getElementById("total").innerText=total
-
-}
-
-function hideAll(){document.querySelectorAll(".section").forEach(e=>e.style.display="none")}
-
-function enter(){
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let town = document.getElementById("town").value;
-
-  localStorage.setItem("name", name);
-  localStorage.setItem("phone", phone);
-  localStorage.setItem("town", town);
-
-  document.getElementById("cartButton").style.display = "block"; // إظهار السلة بعد الدخول
-
-  hideAll();
-  document.getElementById("categories").style.display = "block";
-}
-
-function showStores(){
-  hideAll()
-  document.getElementById("stores").style.display="block"
-  let list=document.getElementById("storesList")
-  list.innerHTML=""
-  stores.forEach((s,i)=>{
-    list.innerHTML+=`<div class="store"><img src="${s.logo}"><h4>${s.name}</h4><button onclick="openStore(${i})">طلب</button></div>`
-  })
-}
-function openStore(i){
-
-  currentStore=stores[i]
- cart = []
-  hideAll()
-  document.getElementById("storePage").style.display="block"
-  document.getElementById("storeName").innerText = currentStore.name
-  let textHTML = `<p style="font-weight:bold;">${currentStore.mainText}</p><p style="font-size:14px; opacity:0.8;">${currentStore.subText}</p>`
-
- 
-document.getElementById("storeText").innerHTML = textHTML
-let gallery = document.getElementById("gallery")
-let html = `
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-">
-`
-currentStore.images.forEach(img=>{
-  html += `
-  <img src="${img}" 
-  style="
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  border-radius:14px;
-  "
-  loading="lazy"
-  >
-  `
-})
-
-html += '</div>'
-
-gallery.innerHTML = html
-
-let productsHTML = `<div class="products">`
-
-currentStore.products?.forEach((p,i)=>{
-  productsHTML += `
-  <div class="product">
-    <img src="${p.img}">
-    <div>${p.name}</div>
-    <div>${p.price} ₪</div>
-    <button onclick="addToCart(${i})">+</button>
-  </div>
-  `
-})
-
-productsHTML += `</div>`
-
-gallery.innerHTML += productsHTML
-
-}
-
-
-function openOrder(){
-  hideAll()
-
-renderCart()
-
-  document.getElementById("orderPage").style.display="block"
-
-  // بيانات المستخدم
-  document.getElementById("orderName").value = localStorage.getItem("name")
-  document.getElementById("orderPhone").value = localStorage.getItem("phone")
-
-  // بيانات المتجر الذي اختاره الزبون
-  document.getElementById("orderStoreLogo").src = currentStore.logo
-  document.getElementById("orderStoreName").innerText = currentStore.name
-}
-
-function backStore(){hideAll();document.getElementById("storePage").style.display="block"}
 
 function sendOrder(){
 
-if(cart.length==0){
-  alert("السلة فارغة ❌")
-  return
-}
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let store = document.getElementById("store").value;
+  let town = document.getElementById("town").value;
+  let order = document.getElementById("orderText").value;
 
-let name=document.getElementById("orderName").value
-let phone=document.getElementById("orderPhone").value
-let town=localStorage.getItem("town")
-
-let order=cart.map(i=>`${i.name} x${i.qty}`).join("\n")
-
-let msg=`طلب جديد\n\nالاسم: ${name}\nالهاتف: ${phone}\nالبلدة: ${town}\n\nالمتجر: ${currentStore.name}\n\nالطلب:\n${order}`
-
-navigator.clipboard.writeText(msg)
-
-window.open(`https://wa.me/972546088878?text=${encodeURIComponent(msg)}`)
-
-cart = []
-renderCart()
-
-}
-
-function toggleAccount(){
-  let box=document.getElementById("accountBox")
-  if(box.style.display=="block"){box.style.display="none"}
-  else{
-    box.style.display="block"
-    document.getElementById("accName").value=localStorage.getItem("name")
-    document.getElementById("accPhone").value=localStorage.getItem("phone")
-    document.getElementById("accTown").value=localStorage.getItem("town")
+  if(name=="" || phone=="" || store=="" || town=="" || order==""){
+    alert("املأ كل الحقول ❌");
+    return;
   }
-}
-function saveAccount(){
-  localStorage.setItem("name",document.getElementById("accName").value)
-  localStorage.setItem("phone",document.getElementById("accPhone").value)
-  localStorage.setItem("town",document.getElementById("accTown").value)
-  document.getElementById("total").style.color="yellow"
-setTimeout(()=>{
-document.getElementById("total").style.color="white"
-},500)
 
-}
+  let msg = `طلب جديد 🚀
 
-function renderCart(){
-  let html=""
-  let total=0
-  let count=0
+الاسم: ${name}
+الهاتف: ${phone}
+المحل: ${store}
+البلدة: ${town}
 
-  cart.forEach((item,i)=>{
-    html += `
-      <div style="margin-bottom:8px;">
-        ${item.name} x${item.qty} 
-        <button onclick="editCartItem(${i})" style="padding:2px 5px; font-size:12px;">✏️ تعديل</button>
-      </div>
-    `
-    total += item.price * item.qty
-    count += item.qty
-  })
+الطلب:
+${order}
 
-  document.getElementById("cartView").innerHTML = html
-  document.getElementById("total").innerText = total
-  document.getElementById("cartCount").innerText = count
-}
+📍 يرجى إرسال موقعك بعد هذه الرسالة`;
 
-function addToCart(i){
-  let p=currentStore.products[i]
-  let found=cart.find(x=>x.name==p.name)
-  if(found){
-    found.qty++
-  }else{
-    cart.push({...p, qty:1})
-  }
-  renderCart()
-  alert("تمت الإضافة ✔️")
-}
+  let whatsapp = "972546088878"; // غير الرقم
 
-// اخفاء السلة افتراضياً
-document.getElementById("cartButton").style.display = "none";
-
-function editCartItem(i){
-  let newName = prompt("قم بتعديل المنتج أو إضافة ملاحظة:", cart[i].name)
-  if(newName !== null && newName.trim() !== ""){
-    cart[i].name = newName.trim()
-    renderCart()
-    alert("تم تعديل المنتج ✔️")
-  }
+  window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`);
 }
 
 </script>
