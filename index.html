@@ -116,6 +116,8 @@ button:active{
     <button onclick="start()">ابدأ الطلب</button>
   </div>
 
+  <button onclick="backHome()">رجوع</button>
+  
   <!-- صفحة الطلب -->
   <div id="order" class="hidden">
 
@@ -150,6 +152,11 @@ button:active{
 
 <script>
 
+function backHome(){
+  document.getElementById("order").style.display="none";
+  document.getElementById("home").style.display="block";
+}
+  
 function start(){
   document.getElementById("home").style.display="none";
   document.getElementById("order").style.display="block";
