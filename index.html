@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Delivery سريع</title>
 
-<!-- خط احترافي -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 body{
   margin:0;
   font-family:'Cairo', sans-serif;
@@ -18,9 +16,9 @@ body{
   text-align:center;
 }
 
-/* خلفية ناعمة */
+/* الحاوية */
 .container{
-  padding:20px;
+  padding:25px 15px;
 }
 
 /* اللوقو */
@@ -31,13 +29,14 @@ body{
 
 /* العنوان */
 h1{
-  font-size:26px;
+  font-size:28px;
   margin-top:15px;
 }
 
 /* وصف */
 p{
   opacity:0.8;
+  font-size:15px;
 }
 
 /* الحقول */
@@ -51,16 +50,15 @@ input, select, textarea{
   background:#1e1e1e;
   color:white;
   text-align:center;
-  transition:0.2s;
+  transition:0.3s;
 }
 
 input:focus, textarea:focus, select:focus{
   outline:none;
   border-color:#f1c40f;
-  box-shadow:0 0 5px #f1c40f;
+  box-shadow:0 0 8px #f1c40f;
 }
 
-/* textarea */
 textarea{
   height:100px;
 }
@@ -76,16 +74,29 @@ button{
   width:90%;
   font-weight:bold;
   color:black;
-  transition:0.2s;
-  box-shadow:0 4px 10px rgba(0,0,0,0.4);
+  transition:0.3s;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  cursor:pointer;
 }
 
 button:hover{
-  transform:scale(1.03);
+  transform:scale(1.05);
+  box-shadow:0 6px 15px rgba(0,0,0,0.6);
 }
 
 button:active{
   transform:scale(0.97);
+}
+
+/* زر رجوع */
+.backBtn{
+  background:#333;
+  color:#f1c40f;
+  margin-top:10px;
+}
+
+.backBtn:hover{
+  background:#444;
 }
 
 /* إخفاء */
@@ -98,36 +109,27 @@ button:active{
   margin-top:10px;
   opacity:0.7;
 }
-
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
-  <!-- الصفحة الأولى -->
+  <!-- الصفحة الرئيسية -->
   <div id="home">
     <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
-
     <h1>مرحباً بك في ديليفري سريع 🛵</h1>
     <p>اطلب أي شيء ونحن نوصله لك بأسرع وقت 🔥</p>
-
     <button onclick="start()">ابدأ الطلب</button>
   </div>
 
-  <button onclick="backHome()">رجوع</button>
-  
   <!-- صفحة الطلب -->
   <div id="order" class="hidden">
 
     <input id="name" placeholder="الاسم">
     <input id="phone" placeholder="رقم الهاتف">
-
-    <!-- اسم المحل -->
     <input id="store" placeholder="اسم المحل (مثلاً: مطعم، سوبرماركت...)">
 
-    <!-- البلدة -->
     <select id="town">
       <option value="">اختر البلدة</option>
       <option>مجد الكروم</option>
@@ -141,34 +143,30 @@ button:active{
     <textarea id="orderText" placeholder="ماذا تريد؟ ✍️"></textarea>
 
     <button onclick="sendOrder()">إرسال الطلب 🚀</button>
+    <button class="backBtn" onclick="backHome()">رجوع للصفحة الرئيسية ↩️</button>
 
-    <p class="note">
-📍 بعد إرسال الطلب، أرسل موقعك من واتساب لتسريع التوصيل
-    </p>
-
+    <p class="note">📍 بعد إرسال الطلب، أرسل موقعك من واتساب لتسريع التوصيل</p>
   </div>
 
 </div>
 
 <script>
-
-function backHome(){
-  document.getElementById("order").style.display="none";
-  document.getElementById("home").style.display="block";
-}
-  
 function start(){
   document.getElementById("home").style.display="none";
   document.getElementById("order").style.display="block";
 }
 
-function sendOrder(){
+function backHome(){
+  document.getElementById("order").style.display="none";
+  document.getElementById("home").style.display="block";
+}
 
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let store = document.getElementById("store").value;
-  let town = document.getElementById("town").value;
-  let order = document.getElementById("orderText").value;
+function sendOrder(){
+  let name = document.getElementById("name").value.trim();
+  let phone = document.getElementById("phone").value.trim();
+  let store = document.getElementById("store").value.trim();
+  let town = document.getElementById("town").value.trim();
+  let order = document.getElementById("orderText").value.trim();
 
   if(name=="" || phone=="" || store=="" || town=="" || order==""){
     alert("املأ كل الحقول ❌");
@@ -187,11 +185,10 @@ ${order}
 
 📍 يرجى إرسال موقعك بعد هذه الرسالة`;
 
-  let whatsapp = "972546088878"; // غير الرقم
+  let whatsapp = "972546088878"; // غيّر الرقم
 
   window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`);
 }
-
 </script>
 
 </body>
