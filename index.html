@@ -9,19 +9,15 @@
 
 <style>
 
-#home, #user, #types, #details{
-  width:100%;
-  max-width:420px;
-}
-  
-  
-body{
+html, body{
+  height:100%;
   margin:0;
   font-family:'Cairo', sans-serif;
   background:#111;
   color:white;
-  text-align:center;
+}
 
+/* الحاوية الأساسية */
 .container{
   min-height:100vh;
   display:flex;
@@ -30,50 +26,126 @@ body{
   padding:20px;
 }
 
-
-.logo{
-  width:120px;
-  margin-top:20px;
+/* تحديد عرض الصفحات (شكل تطبيق) */
+#home, #user, #types, #details{
+  width:100%;
+  max-width:420px;
 }
 
-.hidden{display:none;}
+/* اللوجو */
+.logo{
+  width:110px;
+  margin:20px auto 10px;
+  display:block;
+}
 
-input, textarea, select{
-  width:90%;
-  padding:14px;
-  margin-top:10px;
-  border-radius:10px;
-  border:1px solid #333;
-  background:#1e1e1e;
-  color:white;
+/* العناوين */
+h2{
+  margin:10px 0;
   text-align:center;
 }
 
-textarea{height:100px;}
+/* النص */
+p{
+  text-align:center;
+  opacity:0.8;
+  font-size:14px;
+}
 
+/* الحقول */
+input, textarea, select{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#1e1e1e;
+  color:white;
+  font-size:15px;
+  text-align:center;
+  transition:0.25s;
+}
+
+input:focus, textarea:focus, select:focus{
+  outline:none;
+  border-color:#f1c40f;
+  box-shadow:0 0 6px #f1c40f;
+}
+
+/* textarea */
+textarea{
+  min-height:100px;
+  resize:none;
+}
+
+/* الأزرار */
 button{
-  width:90%;
+  width:100%;
   padding:14px;
   margin-top:12px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
   background:#f1c40f;
   font-weight:bold;
   font-size:16px;
+  color:black;
   cursor:pointer;
+  transition:0.2s;
+  box-shadow:0 4px 10px rgba(0,0,0,0.4);
 }
 
+button:hover{
+  transform:scale(1.03);
+}
+
+button:active{
+  transform:scale(0.97);
+}
+
+/* زر الرجوع */
 .back{
-  background:#333;
+  background:#222;
   color:#f1c40f;
+  box-shadow:none;
 }
 
+/* الكروت (اختيار النوع) */
 .card{
+  width:100%;
   background:#1e1e1e;
   padding:15px;
-  margin-top:10px;
-  border-radius:10px;
+  margin-top:12px;
+  border-radius:12px;
   cursor:pointer;
+  font-size:16px;
+  transition:0.25s;
+  border:1px solid #333;
+}
+
+.card:hover{
+  background:#2a2a2a;
+  border-color:#f1c40f;
+  transform:scale(1.02);
+}
+
+/* إخفاء */
+.hidden{
+  display:none;
+}
+
+/* تحسين الموبايل */
+@media (max-width:480px){
+  .container{
+    padding:15px;
+  }
+
+  h2{
+    font-size:20px;
+  }
+
+  button{
+    font-size:15px;
+  }
 }
   
 </style>
