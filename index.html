@@ -16,98 +16,53 @@ body{
   text-align:center;
 }
 
-/* الحاوية */
 .container{
-  padding:25px 15px;
+  padding:20px;
 }
 
-/* اللوقو */
 .logo{
-  width:130px;
+  width:120px;
   margin-top:20px;
 }
 
-/* العنوان */
-h1{
-  font-size:28px;
-  margin-top:15px;
-}
+.hidden{display:none;}
 
-/* وصف */
-p{
-  opacity:0.8;
-  font-size:15px;
-}
-
-/* الحقول */
-input, select, textarea{
+input, textarea, select{
   width:90%;
   padding:14px;
-  margin-top:12px;
-  border-radius:12px;
+  margin-top:10px;
+  border-radius:10px;
   border:1px solid #333;
-  font-size:16px;
   background:#1e1e1e;
   color:white;
   text-align:center;
-  transition:0.3s;
 }
 
-input:focus, textarea:focus, select:focus{
-  outline:none;
-  border-color:#f1c40f;
-  box-shadow:0 0 8px #f1c40f;
-}
+textarea{height:100px;}
 
-textarea{
-  height:100px;
-}
-
-/* الأزرار */
 button{
-  background:#f1c40f;
-  border:none;
-  padding:15px;
-  border-radius:12px;
-  font-size:18px;
-  margin-top:15px;
   width:90%;
+  padding:14px;
+  margin-top:12px;
+  border:none;
+  border-radius:10px;
+  background:#f1c40f;
   font-weight:bold;
-  color:black;
-  transition:0.3s;
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+  font-size:16px;
   cursor:pointer;
 }
 
-button:hover{
-  transform:scale(1.05);
-  box-shadow:0 6px 15px rgba(0,0,0,0.6);
-}
-
-button:active{
-  transform:scale(0.97);
-}
-
-/* زر رجوع */
-.backBtn{
+.back{
   background:#333;
   color:#f1c40f;
+}
+
+.card{
+  background:#1e1e1e;
+  padding:15px;
   margin-top:10px;
-}
-
-.backBtn:hover{
-  background:#444;
-}
-
-/* إخفاء */
-.hidden{
-  display:none;
-}
-
-.note{
-  font-size:13px;
-  margin-top:10px;
-  opacity:0.7;
+  border-radius:10px;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -115,87 +70,162 @@ button:active{
 <body>
 <div class="container">
 
-  <!-- الصفحة الرئيسية -->
-  <div id="home">
-    <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
-    <h1>مرحباً بك في ديليفري سريع 🛵</h1>
-    <p>اطلب أي شيء ونحن نوصله لك بأسرع وقت 🔥</p>
-    <br>
-     زبائننا الكرام ساعات العمل 🕔 <br>
-   ☀️ 11:00 -> 00:00 🌙
-    <br>
-    
-    <button onclick="start()">ابدأ الطلب</button>
-  </div>
+<!-- الصفحة الرئيسية -->
+<div id="home">
+  <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
+  <h2>ديليفري سريع 🛵</h2>
+  <p>اطلب أي شيء بسرعة وراحة</p>
+  <button onclick="goToUser()">ابدأ الطلب</button>
+</div>
 
-  <!-- صفحة الطلب -->
-  <div id="order" class="hidden">
+<!-- بيانات المستخدم -->
+<div id="user" class="hidden">
+  <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
+  <input id="name" placeholder="الاسم">
+  <input id="phone" placeholder="رقم الهاتف">
+  
+  <select id="town">
+    <option value="">اختر البلدة</option>
+    <option>مجد الكروم</option>
+    <option>دير الأسد</option>
+    <option>البعنة</option>
+    <option>كرمئيل</option>
+  </select>
 
+  <button onclick="saveUser()">التالي</button>
+  <button class="back" onclick="backHome()">رجوع</button>
+</div>
 
-   <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
+<!-- اختيار النوع -->
+<div id="types" class="hidden">
+  <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
 
-    <input id="name" placeholder="الاسم">
-    <input id="phone" placeholder="رقم الهاتف">
-    <input id="store" placeholder="اسم المحل ">
+  <div class="card" onclick="selectType('طعام')">🍔 طلب طعام</div>
+  <div class="card" onclick="selectType('سوبرماركت')">🛒 سوبرماركت</div>
+  <div class="card" onclick="selectType('أغراض')">📦 توصيل أغراض</div>
+  <div class="card" onclick="selectType('هدية')">🎁 توصيل هدية</div>
 
-    <select id="town">
-      <option value="">اختر البلدة</option>
-      <option>مجد الكروم</option>
-      <option>دير الأسد</option>
-      <option>البعنة</option>
-      <option>كرمئيل</option>
-      <option>نحف</option>
-      <option>بار ليف</option>
-    </select>
+  <button class="back" onclick="backUser()">رجوع</button>
+</div>
 
-    <textarea id="orderText" placeholder="اكتب طلبك"></textarea>
+<!-- التفاصيل -->
+<div id="details" class="hidden">
+  <img class="logo" src="https://i.postimg.cc/C5gDy2Jr/sssdsd1.png">
 
-    <button onclick="sendOrder()">إرسال الطلب 🚀</button>
-    <button class="backBtn" onclick="backHome()">رجوع للصفحة الرئيسية ↩️</button>
-    <br>
-    <p class="note">📍 بعد إرسال الطلب، أرسل موقعك من واتساب لتسريع التوصيل</p>
-  </div>
+  <div id="dynamicFields"></div>
+
+  <button onclick="sendOrder()">إرسال الطلب 🚀</button>
+  <button class="back" onclick="backTypes()">رجوع</button>
+</div>
 
 </div>
 
 <script>
-function start(){
-  document.getElementById("home").style.display="none";
-  document.getElementById("order").style.display="block";
+let userData = {};
+let orderType = "";
+
+function goToUser(){
+  hideAll();
+  document.getElementById("user").style.display="block";
 }
 
-function backHome(){
-  document.getElementById("order").style.display="none";
-  document.getElementById("home").style.display="block";
-}
+function saveUser(){
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let town = document.getElementById("town").value;
 
-function sendOrder(){
-  let name = document.getElementById("name").value.trim();
-  let phone = document.getElementById("phone").value.trim();
-  let store = document.getElementById("store").value.trim();
-  let town = document.getElementById("town").value.trim();
-  let order = document.getElementById("orderText").value.trim();
-
-  if(name=="" || phone=="" || store=="" || town=="" || order==""){
-    alert("املأ كل الحقول ❌");
+  if(!name || !phone || !town){
+    alert("املأ جميع البيانات");
     return;
   }
 
-  let msg = `طلب جديد 🚀
+  userData = {name, phone, town};
 
-الاسم: ${name}
-الهاتف: ${phone}
-المحل: ${store}
-البلدة: ${town}
+  hideAll();
+  document.getElementById("types").style.display="block";
+}
 
-الطلب:
-${order}
+function selectType(type){
+  orderType = type;
+  let html = "";
 
-📍 يرجى إرسال موقعك بعد هذه الرسالة`;
+  if(type=="طعام"){
+    html = `
+    <input id="store" placeholder="اسم المطعم">
+    <textarea id="detailsText" placeholder="ماذا تريد؟"></textarea>`;
+  }
 
-  let whatsapp = "972546088878"; // غيّر الرقم
+  if(type=="سوبرماركت"){
+    html = `
+    <input id="store" placeholder="اسم السوبرماركت">
+    <textarea id="detailsText" placeholder="اكتب قائمة المشتريات"></textarea>`;
+  }
 
-  window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`);
+  if(type=="أغراض"){
+    html = `
+    <textarea id="detailsText" placeholder="ما الذي تريد توصيله؟ ومن أين إلى أين؟"></textarea>`;
+  }
+
+  if(type=="هدية"){
+    html = `
+    <textarea id="detailsText" placeholder="ما هي الهدية؟ هل هناك رسالة؟"></textarea>`;
+  }
+
+  document.getElementById("dynamicFields").innerHTML = html;
+
+  hideAll();
+  document.getElementById("details").style.display="block";
+}
+
+function sendOrder(){
+  let details = document.getElementById("detailsText").value;
+  let store = document.getElementById("store") ? document.getElementById("store").value : "";
+
+  if(!details){
+    alert("اكتب التفاصيل");
+    return;
+  }
+
+  let msg = `🚀 طلب جديد - Delivery سريع
+
+👤 الاسم: ${userData.name}
+📞 الهاتف: ${userData.phone}
+📍 البلدة: ${userData.town}
+
+📦 نوع الطلب: ${orderType}
+
+🏪 المحل: ${store}
+
+📝 التفاصيل:
+${details}
+
+📍 الرجاء إرسال الموقع لتسريع التوصيل`;
+
+  let phone = "972546088878";
+
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
+}
+
+function hideAll(){
+  document.getElementById("home").style.display="none";
+  document.getElementById("user").style.display="none";
+  document.getElementById("types").style.display="none";
+  document.getElementById("details").style.display="none";
+}
+
+function backHome(){
+  hideAll();
+  document.getElementById("home").style.display="block";
+}
+
+function backUser(){
+  hideAll();
+  document.getElementById("user").style.display="block";
+}
+
+function backTypes(){
+  hideAll();
+  document.getElementById("types").style.display="block";
 }
 </script>
 
