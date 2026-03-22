@@ -9,136 +9,154 @@
 
 <style>
 
-html, body{
-  height:100%;
-  margin:0;
-  font-family:'Cairo', sans-serif;
-  background:#111;
-  color:white;
+/* ===== إعدادات عامة ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background: #111;
+  color: white;
+  overflow-y: auto;
 }
 
-/* الحاوية الأساسية */
-.container{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:15px;
+/* ===== الحاوية الرئيسية ===== */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
 }
 
-/* كل الصفحات */
-#home, #user, #types, #details{
-  width:100%;
-  max-width:380px;
-  background:#181818;
-  padding:20px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+/* ===== كل الصفحات ===== */
+#home, #user, #types, #details {
+  width: 100%;
+  max-width: 380px;
+  margin: 20px 0;
+  padding: 20px;
+  background: #181818;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* اللوقو */
-.logo{
-  width:100px;
-  display:block;
-  margin:0 auto 10px;
+/* ===== اللوجو ===== */
+.logo {
+  width: 100px;
+  margin: 0 auto 10px;
+  display: block;
 }
 
-/* العنوان */
-h2{
-  text-align:center;
-  margin:10px 0;
+/* ===== العناوين ===== */
+h2 {
+  text-align: center;
+  margin: 10px 0;
 }
 
-/* النص */
-p{
-  text-align:center;
-  opacity:0.75;
-  font-size:14px;
+/* ===== النصوص ===== */
+p {
+  text-align: center;
+  opacity: 0.75;
+  font-size: 14px;
 }
 
-/* الحقول */
-input, textarea, select{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  border-radius:10px;
-  border:1px solid #333;
-  background:#111;
-  color:white;
-  font-size:14px;
-  text-align:center;
-  transition:0.2s;
+/* ===== الحقول ===== */
+input, textarea, select {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #111;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  transition: 0.2s;
 }
 
-input:focus, textarea:focus, select:focus{
-  outline:none;
-  border-color:#f1c40f;
-  box-shadow:0 0 5px #f1c40f;
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #f1c40f;
+  box-shadow: 0 0 5px #f1c40f;
 }
 
-/* textarea */
-textarea{
-  min-height:90px;
-  resize:none;
+textarea {
+  min-height: 90px;
+  resize: none;
 }
 
-/* الأزرار */
-button{
-  width:100%;
-  padding:13px;
-  margin-top:12px;
-  border:none;
-  border-radius:10px;
-  background:#f1c40f;
-  font-weight:bold;
-  font-size:15px;
-  color:black;
-  cursor:pointer;
-  transition:0.2s;
+/* ===== الأزرار ===== */
+button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f1c40f;
+  font-weight: bold;
+  font-size: 15px;
+  color: black;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-button:hover{
-  transform:scale(1.03);
+button:hover {
+  transform: scale(1.03);
 }
 
-button:active{
-  transform:scale(0.97);
+button:active {
+  transform: scale(0.97);
 }
 
-/* زر الرجوع */
-.back{
-  background:#2a2a2a;
-  color:#f1c40f;
+/* ===== زر الرجوع ===== */
+.back {
+  background: #2a2a2a;
+  color: #f1c40f;
 }
 
-/* كروت الاختيار */
-.card{
-  width:100%;
-  background:#111;
-  padding:14px;
-  margin-top:10px;
-  border-radius:10px;
-  cursor:pointer;
-  border:1px solid #333;
-  transition:0.2s;
+/* ===== كروت اختيار النوع ===== */
+.card {
+  width: 100%;
+  background: #111;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #333;
+  transition: 0.2s;
+  text-align: center;
+  font-size: 16px;
 }
 
-.card:hover{
-  border-color:#f1c40f;
-  background:#1c1c1c;
-  transform:scale(1.02);
+.card:hover {
+  border-color: #f1c40f;
+  background: #1c1c1c;
+  transform: scale(1.02);
 }
 
-/* إخفاء */
-.hidden{
-  display:none;
+/* ===== إخفاء ===== */
+.hidden {
+  display: none;
 }
 
-/* موبايل */
-@media (max-height:650px){
-  .container{
-    align-items:flex-start;
-    padding-top:20px;
+/* ===== تحسين الموبايل ===== */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  .card {
+    font-size: 14px;
   }
 }
   
